@@ -1,9 +1,7 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useState, useRef } from "react";
 import { Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import Carousel from "react-native-snap-carousel";
-import { useEffect } from "react/cjs/react.development";
 import styled from "styled-components";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
@@ -29,7 +27,7 @@ const DropdownModal = ({
   const handleMarker = (index) => {
     carousel.snapToItem(index, true);
   };
-  // useEffect(() => handleMarker(3), [])
+
   return (
     <Modal
       isVisible={showDropdown}
@@ -63,7 +61,7 @@ const DropdownModal = ({
               renderItem={({ item, index }) => (
                 <ModalItemContainer key={index} seperatorColor={seperatorColor}>
                   <ModalItemText itemsColor={itemsColor}>
-                    {item.value}
+                    {item.key}
                   </ModalItemText>
                 </ModalItemContainer>
               )}
