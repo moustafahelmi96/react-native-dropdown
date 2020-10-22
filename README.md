@@ -29,6 +29,9 @@ import PressableField from '@moustafahelmi/react-native-dropdown'
 />
 ```
 
+# Demo
+![react-native-dropdown demo](https://user-images.githubusercontent.com/51541292/96886014-7750fe00-1483-11eb-903d-4fae3058d9a6.gif)
+
 
 # Contributing
 
