@@ -114,6 +114,5 @@ const ButtonText = styled.Text`
 const OuterModalContainer = styled.SafeAreaView`
   background-color: ${({ backgroundColor }) =>
     backgroundColor || "rgb(208,212,218)"};
-  background-color: red;
   height: ${screenHeight * 0.3}px;
 `;
