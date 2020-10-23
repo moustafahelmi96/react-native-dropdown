@@ -2,18 +2,18 @@ react-native-dropdown is a javascript library that works on both android and ios
 
 # Installation
 
-``` npm install @moustafahelmi/react-native-dropdown ```
+`npm install @moustafahelmi/react-native-dropdown`
 
 # Import
 
 ```bash
-import PressableField from '@moustafahelmi/react-native-dropdown'
+import Dropdown from '@moustafahelmi/react-native-dropdown'
 ```
 
 # Usage
 
 ```
-<PressableField
+<Dropdown
   buttonTitle={'done'}
   dataArray={dummyData}
   onSelect={selected => {
@@ -30,8 +30,8 @@ import PressableField from '@moustafahelmi/react-native-dropdown'
 ```
 
 # Demo
-![react-native-dropdown demo](https://user-images.githubusercontent.com/51541292/96886014-7750fe00-1483-11eb-903d-4fae3058d9a6.gif)
 
+![react-native-dropdown demo](https://user-images.githubusercontent.com/51541292/96886014-7750fe00-1483-11eb-903d-4fae3058d9a6.gif)
 
 # Contributing
 
