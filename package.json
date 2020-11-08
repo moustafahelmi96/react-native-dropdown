@@ -1,6 +1,6 @@
 {
   "name": "@moustafahelmi/react-native-dropdown",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "react native dropdown for both android and ios",
   "main": "src/index",
   "scripts": {
