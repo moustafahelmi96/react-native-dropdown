@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components";
+
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
+
 const DropdownModal = ({
   items,
   showDropdown,
@@ -16,6 +18,7 @@ const DropdownModal = ({
   backgroundColor,
   setSelected,
   onSelect,
+  value,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [index, setIndex] = useState(0);
@@ -27,6 +30,12 @@ const DropdownModal = ({
     carousel.snapToItem(index, true);
   };
 
+  useEffect(() => {
+    const res = items.findIndex((x) => x.value === value);
+    setSelectedIndex(res);
+    setIndex(res);
+    setSelected(items[res]);
+  }, [value]);
   return (
     <Modal
       isVisible={showDropdown}

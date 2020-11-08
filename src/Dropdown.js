@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import proptypes from "prop-types";
 import styled from "styled-components";
@@ -18,9 +18,11 @@ const Dropdown = ({
   placeholder,
   placeholderColor,
   textColor,
+  value,
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selected, setSelected] = useState();
+
   return (
     <>
       <DropdownModal
@@ -30,6 +32,7 @@ const Dropdown = ({
         buttonTitle={buttonTitle}
         onSelect={onSelect}
         setSelected={setSelected}
+        value={value}
       />
       <Field
         fieldWidth={fieldWidth}
@@ -65,6 +68,7 @@ Dropdown.propTypes = {
   imageSize: proptypes.number,
   fieldWidth: proptypes.number,
   fieldHeight: proptypes.number,
+  reset: proptypes.bool,
 };
 
 export default Dropdown;
