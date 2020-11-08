@@ -18,11 +18,10 @@ const DropdownModal = ({
   onSelect,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   const carousel = useRef(null);
   const onSnapToItem = (selectedInd) => {
-    setSelectedIndex(selectedInd);
-    setSelected(items[selectedInd]);
-    onSelect(items[selectedInd]);
+    setIndex(selectedInd);
   };
   const handleMarker = (index) => {
     carousel.snapToItem(index, true);
@@ -37,7 +36,14 @@ const DropdownModal = ({
       <ModalContainer>
         <ButtonContainer>
           {buttonTitle && (
-            <Button onPress={() => setShowDropdown(false)}>
+            <Button
+              onPress={() => {
+                setShowDropdown(false);
+                setSelectedIndex(index);
+                setSelected(items[index]);
+                onSelect(items[index]);
+              }}
+            >
               <ButtonText buttonColor={buttonColor}>{buttonTitle}</ButtonText>
             </Button>
           )}
