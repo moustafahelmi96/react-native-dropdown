@@ -19,6 +19,7 @@ const DropdownModal = ({
   setSelected,
   onSelect,
   value,
+  modalWidth,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [index, setIndex] = useState(0);
@@ -39,6 +40,7 @@ const DropdownModal = ({
   return (
     <Modal
       isVisible={showDropdown}
+      deviceWidth={modalWidth ? modalWidth : screenWidth}
       onBackdropPress={() => setShowDropdown(false)}
       style={{ justifyContent: "flex-end", margin: 0 }}
     >

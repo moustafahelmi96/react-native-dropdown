@@ -27,6 +27,7 @@ import Dropdown from '@moustafahelmi/react-native-dropdown'
   placeholderColor={'grey'}
   textColor={'black'}
   value={'value2'}
+  modalWidth={screenWidth}
 />
 ```
 
