@@ -5,7 +5,6 @@ import styled from "styled-components";
 import DropdownModal from "./DropdownModal";
 
 const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
 
 const Dropdown = ({
   dataArray,
