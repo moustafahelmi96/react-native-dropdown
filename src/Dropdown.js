@@ -25,6 +25,11 @@ const Dropdown = ({
   const [showDropdown, setShowDropdown] = useState(false);
   const [selected, setSelected] = useState();
 
+  useEffect(() => {
+    if (value) setSelected(value)
+    else setSelected()
+  }, [value])
+
   return (
     <>
       <DropdownModal
