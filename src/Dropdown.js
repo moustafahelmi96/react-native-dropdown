@@ -32,7 +32,8 @@ const Dropdown = ({
         buttonTitle={buttonTitle}
         onSelect={onSelect}
         setSelected={setSelected}
-        value={value}
+        value={selected?.value || value}
+        warningText={warningText}
       />
       <Field
         fieldWidth={fieldWidth}

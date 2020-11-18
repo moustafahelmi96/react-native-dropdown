@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Dimensions } from "react-native";
+import React, {useEffect, useRef, useState} from "react";
+import {Dimensions, PixelRatio} from "react-native";
 import Modal from "react-native-modal";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components";
@@ -20,6 +20,7 @@ const DropdownModal = ({
   onSelect,
   value,
   modalWidth,
+  warningText
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [index, setIndex] = useState(0);
@@ -84,8 +85,11 @@ const DropdownModal = ({
                     {item.key}
                   </ModalItemText>
                 </ModalItemContainer>
-              )}
-            />
+              }
+            /> : <>
+              <VerticalSpace height={75}/>
+              <WarningText>{warningText || 'لا يوجد اختيارات'}</WarningText>
+            </>}
           </OuterModalContainer>
         </Container>
       </ModalContainer>
@@ -135,3 +139,15 @@ const OuterModalContainer = styled.SafeAreaView`
     backgroundColor || "rgb(208,212,218)"};
   height: ${screenHeight * 0.3}px;
 `;
+
+const WarningText = styled.Text`
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  font-size: ${28}px;
+  color: ${({buttonColor}) => buttonColor || "black"};
+`;
+
+const VerticalSpace = styled.View`
+  height: ${({height}) => PixelRatio.roundToNearestPixel(height)}px;
+`
