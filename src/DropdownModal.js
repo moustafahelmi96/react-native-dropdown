@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Dimensions } from "react-native";
+import React, {useEffect, useRef, useState} from "react";
+import {Dimensions, PixelRatio} from "react-native";
 import Modal from "react-native-modal";
 import Carousel from "react-native-snap-carousel";
 import styled from "styled-components";
@@ -14,16 +14,18 @@ const DropdownModal = ({
   buttonTitle,
   itemsColor,
   buttonColor,
-  seperatorColor,
+  separatorColor,
   backgroundColor,
   setSelected,
   onSelect,
   value,
   modalWidth,
+  warningText
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [index, setIndex] = useState(0);
   const carousel = useRef(null);
+
   const onSnapToItem = (selectedInd) => {
     setIndex(selectedInd);
   };
@@ -37,6 +39,7 @@ const DropdownModal = ({
     setIndex(res);
     setSelected(items[res]);
   }, [value]);
+
   return (
     <Modal
       isVisible={showDropdown}
@@ -49,10 +52,11 @@ const DropdownModal = ({
           {buttonTitle && (
             <Button
               onPress={() => {
+                const chosenIndex = index >= 0 ? index : 0
                 setShowDropdown(false);
-                setSelectedIndex(index);
-                setSelected(items[index]);
-                onSelect(items[index]);
+                setSelectedIndex(chosenIndex);
+                setSelected(items[chosenIndex]);
+                onSelect(items[chosenIndex]);
               }}
             >
               <ButtonText buttonColor={buttonColor}>{buttonTitle}</ButtonText>
@@ -61,7 +65,7 @@ const DropdownModal = ({
         </ButtonContainer>
         <Container backgroundColor={backgroundColor}>
           <OuterModalContainer>
-            <Carousel
+            {items && items.length > 0 ? <Carousel
               ref={carousel}
               vertical={true}
               inactiveSlideOpacity={0.3}
@@ -75,14 +79,17 @@ const DropdownModal = ({
               onLayout={() => {
                 carousel.current.snapToItem(selectedIndex, true);
               }}
-              renderItem={({ item, index }) => (
-                <ModalItemContainer key={index} seperatorColor={seperatorColor}>
+              renderItem={({item, index}) =>
+                <ModalItemContainer key={index} seperatorColor={separatorColor}>
                   <ModalItemText itemsColor={itemsColor}>
                     {item.key}
                   </ModalItemText>
                 </ModalItemContainer>
-              )}
-            />
+              }
+            /> : <>
+              <VerticalSpace height={75}/>
+              <WarningText>{warningText || 'لا يوجد اختيارات'}</WarningText>
+            </>}
           </OuterModalContainer>
         </Container>
       </ModalContainer>
@@ -90,6 +97,7 @@ const DropdownModal = ({
   );
 };
 export default DropdownModal;
+
 const ModalContainer = styled.View`
   width: ${screenWidth}px;
   align-self: center;
@@ -131,3 +139,15 @@ const OuterModalContainer = styled.SafeAreaView`
     backgroundColor || "rgb(208,212,218)"};
   height: ${screenHeight * 0.3}px;
 `;
+
+const WarningText = styled.Text`
+  text-align: center;
+  justify-content: center;
+  align-self: center;
+  font-size: ${28}px;
+  color: ${({buttonColor}) => buttonColor || "black"};
+`;
+
+const VerticalSpace = styled.View`
+  height: ${({height}) => PixelRatio.roundToNearestPixel(height)}px;
+`

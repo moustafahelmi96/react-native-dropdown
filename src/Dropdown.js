@@ -5,7 +5,6 @@ import styled from "styled-components";
 import DropdownModal from "./DropdownModal";
 
 const screenWidth = Dimensions.get("window").width;
-const screenHeight = Dimensions.get("window").height;
 
 const Dropdown = ({
   dataArray,
@@ -19,9 +18,16 @@ const Dropdown = ({
   placeholderColor,
   textColor,
   value,
+  showPlaceholder,
+  warningText
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selected, setSelected] = useState();
+
+  useEffect(() => {
+    if (value) setSelected(value)
+    else setSelected()
+  }, [value])
 
   return (
     <>
@@ -32,7 +38,8 @@ const Dropdown = ({
         buttonTitle={buttonTitle}
         onSelect={onSelect}
         setSelected={setSelected}
-        value={value}
+        value={selected?.value || value}
+        warningText={warningText}
       />
       <Field
         fieldWidth={fieldWidth}
@@ -42,7 +49,7 @@ const Dropdown = ({
         }}
       >
         <TextConatoner>
-          {selected ? (
+          {selected && !showPlaceholder ? (
             <Text color={textColor}>{selected?.key}</Text>
           ) : (
             <PlaceholderText color={placeholderColor}>
@@ -69,6 +76,8 @@ Dropdown.propTypes = {
   fieldWidth: proptypes.number,
   fieldHeight: proptypes.number,
   reset: proptypes.bool,
+  warningText: proptypes.string,
+  showPlaceholder: proptypes.bool
 };
 
 export default Dropdown;
@@ -78,7 +87,7 @@ const Field = styled.TouchableOpacity`
   height: ${(p) => (p.fieldHeight ? p.fieldHeight : screenWidth * 0.1)}px;
   border-radius: 10px;
   background-color: white;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   align-self: center;
   flex-direction: row;
@@ -93,13 +102,15 @@ const TextConatoner = styled.View`
 const Text = styled.Text`
   text-align: center;
   font-size: ${18}px;
-  color: ${({ color }) => color || "black"};
+  color: ${({color}) => color || "black"};
+  padding: 0 16px;
 `;
 
 const PlaceholderText = styled.Text`
   text-align: center;
   font-size: ${18}px;
-  color: ${({ color }) => color || "grey"};
+  color: ${({color}) => color || "grey"};
+   padding: 0 16px;
 `;
 
 const ImageContainer = styled.Image.attrs({
